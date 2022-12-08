@@ -1,32 +1,38 @@
 package com.scrud.springcrud.service;
+
 import com.scrud.springcrud.exception.ResourceNotFoundException;
 import com.scrud.springcrud.model.Employee;
 import com.scrud.springcrud.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
+
 @Service
-@Primary
-public class EmployeeServiceImpl implements EmployeeService {
+public class EmployeeServiceImplOne implements EmployeeService {
     @Autowired
     private final EmployeeRepository employeeRepository;
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+
+    public EmployeeServiceImplOne(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
+
     @Override
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
     }
+
     @Override
     public Employee createEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
+
     @Override
     public Employee getEmployeeById(long id) {
         return employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found for given id" + id));
     }
+
     @Override
     public Employee updateEmployee(long id, Employee employeeDetails) {
         Employee updateEmployee = employeeRepository.findById(id)
@@ -37,6 +43,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepository.save(updateEmployee);
         return updateEmployee;
     }
+
     @Override
     public void deleteEmployee(long id) {
         Employee deleteEmployee = employeeRepository.findById(id)

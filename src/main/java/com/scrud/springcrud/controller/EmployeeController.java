@@ -1,39 +1,44 @@
 package com.scrud.springcrud.controller;
+
 import com.scrud.springcrud.model.Employee;
-import com.scrud.springcrud.service.EmployeeServiceImpl;
+import com.scrud.springcrud.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1")
 public class EmployeeController {
+    @Qualifier("EmployeeServiceImpl")
     @Autowired
-    private EmployeeServiceImpl employeeService;
-
-    public EmployeeController(EmployeeServiceImpl employeeService) {
-        this.employeeService = employeeService;
-    }
+    private EmployeeService employeeService;
 
     @GetMapping("/employee")
     public List<Employee> getAllEmployees() {
         return employeeService.getAllEmployees();
     }
+
     @PostMapping("/employee")
     public Employee createEmployee(@RequestBody Employee employee) {
         return employeeService.createEmployee(employee);
     }
+
     @GetMapping("/employee/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable long id) {
         Employee employee = employeeService.getEmployeeById(id);
         return ResponseEntity.ok(employee);
     }
+
     @PutMapping("/employee/{id}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable long id, @RequestBody Employee employeeDetails) {
         Employee employee = employeeService.updateEmployee(id, employeeDetails);
         return ResponseEntity.ok(employee);
     }
+
     @DeleteMapping("/employee/{id}")
     public ResponseEntity<HttpStatus> deleteEmployee(@PathVariable long id) {
         employeeService.deleteEmployee(id);
