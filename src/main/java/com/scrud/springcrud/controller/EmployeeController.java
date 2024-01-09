@@ -1,9 +1,9 @@
 package com.scrud.springcrud.controller;
 
 import com.scrud.springcrud.model.Employee;
-import com.scrud.springcrud.service.EmployeeService;
+import com.scrud.springcrud.service.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
+@ComponentScan("com.scrud")
 public class EmployeeController {
-    @Qualifier("EmployeeServiceImpl")
     @Autowired
-    private EmployeeService employeeService;
+    private EmployeeServiceImpl employeeService;
 
     @GetMapping("/employee")
     public List<Employee> getAllEmployees() {

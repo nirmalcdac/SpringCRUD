@@ -1,0 +1,30 @@
+version: '1'
+services:
+  nirmal-mysqldb:
+    container_name: nirmal-mysqldb
+    image: mysql:latest
+    hostname: "dcsmysql"
+    environment:
+      MYSQL_DATABASE: ems
+      MYSQL_HOST: dcsmysql
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: mysql
+      MYSQL_ROOT_PASSWORD: mysql
+      TZ: Asia/Kolkata
+    ports:
+      - 3306:3306
+
+
+# nirmal-postgresdb:
+#   container_name: nirmal-postgresdb
+#   image: postgres:latest
+#   hostname: "dcspostgres"
+#   environment:
+#     POSTGRES_DATABASE: commerce
+#     POSTGRES_HOST: dcspostgres
+#     POSTGRES_USER: postgres
+#     POSTGRES_PASSWORD: postgres
+#     POSTGRES_ROOT_PASSWORD: supersecret
+#     TZ: Asia/Kolkata
+#   ports:
+#     - 5432:5432

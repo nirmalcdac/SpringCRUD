@@ -1,12 +1,18 @@
 package com.scrud.springcrud.service;
+
 import com.scrud.springcrud.exception.ResourceNotFoundException;
 import com.scrud.springcrud.model.Employee;
 import com.scrud.springcrud.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
+
+//@Service
 @Service
+@Qualifier("employeeService")
 @Primary
 public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
